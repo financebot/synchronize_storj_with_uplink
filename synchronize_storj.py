@@ -369,7 +369,7 @@ for current_new_partial_filepath in list_of_files_to_copy_from_local_dir_to_remo
 		time.sleep(1)
 	elif show_new_files_yes_or_not=='yes':
 		print('Copy commad skipped. This is the Test mode.')
-		print('subprocess.Popen(["uplink", "cp", current_local_fullpath, current_remote_fullpath], stdout=subprocess.PIPE, stderr=subprocess.PIPE')
+		print('subprocess.Popen(["uplink", "cp", current_local_fullpath, current_remote_fullpath])
 
 
 
