@@ -18,4 +18,4 @@ It just check filename and filepath, not file size or file date creation
 
 #example
 <br />
-python3 ./synchronize_storj.py --local_dir /dir6565/dir773  --remote_dir sj://bucket_845/dir747/dir747 --mode_test_or_real real --show_new_files_yes_or_not not
+python3 ./synchronize_storj.py --local_dir /dir6565/dir773  --remote_dir sj://bucket_845/dir747/dir5677 --mode_test_or_real real --show_new_files_yes_or_not not
