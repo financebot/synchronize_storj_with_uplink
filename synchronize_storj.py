@@ -262,18 +262,23 @@ lenght_path_local_folder=len(local_dir_as_array)
 #parse local file again
 #get filepath without root local_dir
 list_partial_filepath_local_5=[]
+list_partial_filepath_local_5b=[]
+
 for current_full_filepath_local in list_files_local_3:
 	current_full_filepath_local_3 = current_full_filepath_local.split("/")
 	current_partial_filepath_local_4=[]
 	current_partial_filepath_local_5=[]
 	#if(current_file_local_3[0]=='.'):  current_file_local_4=current_file_local_3[2:len(current_file_local_3)]
-	current_partial_filepath_local_4=current_full_filepath_local_3[lenght_path_local_folder:len(current_full_filepath_local_3)]
+	current_partial_filepath_local_4=current_full_filepath_local_3[(lenght_path_local_folder-1):len(current_full_filepath_local_3)]
+	current_partial_filepath_local_4b=current_full_filepath_local_3[lenght_path_local_folder:len(current_full_filepath_local_3)]
 	current_partial_filepath_local_5='/'.join(current_partial_filepath_local_4)
+	current_partial_filepath_local_5b='/'.join(current_partial_filepath_local_4b)
 	#print(current_partial_filepath_local_5)
 	#print(current_full_filepath_local)
 	if os.path.isfile(current_full_filepath_local)==True:
 		list_partial_filepath_local_5.append(current_partial_filepath_local_5)
-		#print('isfile: ', current_full_filepath_local)
+		list_partial_filepath_local_5b.append(current_partial_filepath_local_5b)
+		#print('isfile: ', current_partial_filepath_local_5)
 
 
 #print('list_partial_filepath_local:')
@@ -300,8 +305,9 @@ list_of_files_to_copy_from_local_dir_to_remote_dir_case_full_path_local=[]
 #print('list_partial_filepath_local_5: ', len(list_partial_filepath_local_5))
 #print('list_remote_files_5:', len(list_remote_files_5))
 
-
+j=-1
 for current_partial_filepath_local_5 in list_partial_filepath_local_5:
+	j=j+1
 	yes_found=False
 	for current_partial_filepath_remote_5 in list_remote_files_5:
 		if current_partial_filepath_remote_5==current_partial_filepath_local_5:
@@ -310,7 +316,7 @@ for current_partial_filepath_local_5 in list_partial_filepath_local_5:
 			#print('local: ', current_partial_filepath_local_5)
 	if yes_found==False:
 		#print('local555: ', current_partial_filepath_local_5)
-		list_of_files_to_copy_from_local_dir_to_remote_dir_case_partial_path.append(current_partial_filepath_local_5)
+		list_of_files_to_copy_from_local_dir_to_remote_dir_case_partial_path.append(list_partial_filepath_local_5b[j])
 
 
 #print('list_partial_filepath_local:')
@@ -356,7 +362,7 @@ for current_new_partial_filepath in list_of_files_to_copy_from_local_dir_to_remo
 		print('upload files')
 		print(current_local_fullpath)
 		print(current_remote_fullpath)
-		print('\n\n')
+		print('\n')
 
 	#copy files from local directory to remote directory
 	if mode_test_or_real=='real':
@@ -365,11 +371,11 @@ for current_new_partial_filepath in list_of_files_to_copy_from_local_dir_to_remo
 		#process = subprocess.Popen(["uplink", "cp", current_local_fullpath, current_remote_fullpath], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 		process = subprocess.Popen(["uplink", "cp", current_local_fullpath, current_remote_fullpath])
 		process.wait()
-		print('\n\n')
+		print('\n')
 		time.sleep(1)
 	elif show_new_files_yes_or_not=='yes':
 		print('Copy commad skipped. This is the Test mode.')
-		print('subprocess.Popen(["uplink", "cp", current_local_fullpath, current_remote_fullpath])
+		print('subprocess.Popen(["uplink", "cp", current_local_fullpath, current_remote_fullpath], stdout=subprocess.PIPE, stderr=subprocess.PIPE')
 
 
 
@@ -394,6 +400,6 @@ It just check filename and filepath, not file size or file date creation
 
 
 #example
-python3 ./synchronize_storj.py --local_dir /dir6565/dir773  --remote_dir sj://bucket_845/dir747/dir5567 --mode_test_or_real real --show_new_files_yes_or_not not
+python3 ./synchronize_storj.py --local_dir ./rootdir002  --remote_dir sj://rootdir001 --mode_test_or_real real --show_new_files_yes_or_not not
 
 '''
